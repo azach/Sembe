@@ -4,8 +4,10 @@
   <title>Sembe</title>
   <link href="/css/themes/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <link href="/css/main.css" rel="stylesheet" type="text/css"/>
+  <link href="/css/table.css" rel="stylesheet" type="text/css"/>
   <script type="text/javascript" src="/scripts/jquery.min.js"></script>
   <script type="text/javascript"src="/scripts/jquery-ui.min.js"></script>
+  <script type="text/javascript"src="/scripts/jquery.dataTables.min.js"></script>
   <script type="text/javascript"src="/scripts/main.js"></script>
 </head>
 <body>
@@ -30,7 +32,20 @@
 	</fieldset>	
 </div>
 
-<div id="selectpat"></div>
+<br />
+
+<div id="selectpatdialog">
+<table id="selectpat" cellpadding="0" cellspacing="0" border="0">
+    <thead>
+        <tr>
+            <th style="width: 100px;">ID</th>
+            <th style="width: 45%;">First Name</th>
+            <th style="width: 45%;">Last Name</th>
+        </tr>
+        <tbody></tbody>
+    </thead>
+</table>
+</div>
 
 <div id="loading"><img class="centered" src="/images/loading.gif" alt="Loading"/></div>
 

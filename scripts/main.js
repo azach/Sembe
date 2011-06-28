@@ -1,70 +1,73 @@
-$(document).ready(function() {
-  //Stylize the UI
-  $(".date").datepicker();
-  //New patient
-  $("#newpat").button();
-  $("#newpat").click(
-	function() {
-		//Hide MRN
-		$("#patdialog").bind("dialogopen", function(event, ui) {
-			$("#mrn").hide();
-			$("#mrnlabel").hide();		
-		});
-		//Add new patient buttons to dialog
-		$("#patdialog").dialog("option", "buttons", { 
-			"Create": function() { 
-				var close = NewPatient(this);
-				if (close) { $(this).dialog("close"); }
-			},
-			"Cancel": function() { $(this).dialog("close"); }
-		});
-		$("#patdialog").dialog("option", "title", "Create New Patient");
-		$("#patdialog").dialog("open");
+$(document).ready(function () {
+    //Stylize the UI
+    $(".date").datepicker();
+    //New patient
+    $("#newpat").button();
+    $("#newpat").click(
+	function () {
+	    //Hide MRN
+	    $("#patdialog").bind("dialogopen", function (event, ui) {
+	        $("#mrn").hide();
+	        $("#mrnlabel").hide();
+	    });
+	    //Add new patient buttons to dialog
+	    $("#patdialog").dialog("option", "buttons", {
+	        "Create": function () {
+	            var close = NewPatient(this);
+	            if (close) { $(this).dialog("close"); }
+	        },
+	        "Cancel": function () { $(this).dialog("close"); }
+	    });
+	    $("#patdialog").dialog("option", "title", "Create New Patient");
+	    $("#patdialog").dialog("open");
 	});
-  //Find patient
-  $("#findpat").button();
-  $("#findpat").click(
-	function() {
-		//Show MRN
-		$("#patdialog").bind("dialogopen", function(event, ui) {
-			$("#mrn").show();
-			$("#mrnlabel").show();		
-		});
-		//Add find patient buttons to dialog
-			$("#patdialog").dialog("option", "buttons", { 
-			"OK": function() { 
-				var close = FindPatient(this);
-				if (close) { $(this).dialog("close"); }
-			},
-			"Cancel": function() { $(this).dialog("close")
-		}});
-		$("#patdialog").dialog("option", "title", "Find Patient");
-		$("#patdialog").dialog("open");
+    //Find patient
+    $("#findpat").button();
+    $("#findpat").click(
+	function () {
+	    //Show MRN
+	    $("#patdialog").bind("dialogopen", function (event, ui) {
+	        $("#mrn").show();
+	        $("#mrnlabel").show();
+	    });
+	    //Add find patient buttons to dialog
+	    $("#patdialog").dialog("option", "buttons", {
+	        "OK": function () {
+	            var close = FindPatient(this);
+	            if (close) { $(this).dialog("close"); }
+	        },
+	        "Cancel": function () {
+	            $(this).dialog("close")
+	        } 
+	    });
+	    $("#patdialog").dialog("option", "title", "Find Patient");
+	    $("#patdialog").dialog("open");
 	});
-//Define basic patient dialog parameters
-  $("#patdialog").dialog({
-	autoOpen: false,
-	modal: true,
-	width: 420,
-	zIndex: 5,
-	resizable: false,
-	close: function(event, ui) {
-		$("#firstname").val("");
-		$("#lastname").val("");
-		$("#dob").val("");
-		$("#mrn").val("");
-		$("#firstname").removeClass("ui-state-error");
-		$("#lastname").removeClass("ui-state-error");
-		$("#dob").removeClass("ui-state-error");
-	}
-  });
-  $('#loading').hide();
-  $('#loading').ajaxStart(function() {
-       $(this).show();
-  });
-  $('#loading').ajaxStop(function() {
+    //Define basic patient dialog parameters
+    $("#patdialog").dialog({
+        autoOpen: false,
+        modal: true,
+        width: 420,
+        zIndex: 5,
+        resizable: false,
+        close: function (event, ui) {
+            $("#firstname").val("");
+            $("#lastname").val("");
+            $("#dob").val("");
+            $("#mrn").val("");
+            $("#firstname").removeClass("ui-state-error");
+            $("#lastname").removeClass("ui-state-error");
+            $("#dob").removeClass("ui-state-error");
+        }
+    });
+    $("#selectpatdialog").hide();
+    $('#loading').hide();
+    $('#loading').ajaxStart(function () {
+        $(this).show();
+    });
+    $('#loading').ajaxStop(function () {
         $(this).hide();
-  });
+    });
 });
 
 //Create a new patient
@@ -126,22 +129,38 @@ function FindPatient() {
         success: function (msg) {
             var patients = $.parseJSON(msg.d);
             if (patients.length < 1) { alert("Patient not found"); }
-            //SelectPatient(patients);
-            //for (i = 0; i < patients.length; i++) {
-            //alert(patients[i].First_Name + " " + patients[i].Last_Name);
-            //}
+            else { SelectPatient(patients); }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             if (jqXHR.status == 500) {
                 var error = $.parseJSON(jqXHR.responseText);
                 alert(error.Message);
             }
-            else { alert("Error: " + errorThrown); }            
+            else { alert("Error: " + errorThrown); }
         }
     });
     return true;
 }
 
 function SelectPatient(patients) {
-    $('#selectpat').dataTable();
+    $("#selectpatdialog").dialog({
+        modal: true,
+        autoOpen: false,
+        width: 700,
+        zIndex: 5,
+        resizable: true,
+        close: function (ev, ui) { $(this).destroy(); }
+    });
+    $("#selectpatdialog").dialog("option", "title", "Select Patient");
+    $("#selectpatdialog").dialog("open");
+    $("#selectpat").dataTable({
+        "bJQueryUI": true
+    });
+    for (i = 0; i < patients.length; i++) {
+        $("#selectpat").dataTable().fnAddData([
+            patients[i].MRN,
+            patients[i].First_Name,
+            patients[i].Last_Name
+        ]);
+    }
 }

@@ -1,0 +1,31 @@
+.dataTables_length {
+	width: 50%;
+	float: left;
+}
+
+.dataTables_filter {
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+
+.dataTables_info {
+	width: 50%;
+	float: left;
+}
+
+.dataTables_paginate {
+	float: right;
+	text-align: right;
+}
+
+.dataTables_wrapper 
+{
+    float: left;
+    width: 100%;
+}
+
+tr.odd { background-color: #E0EDF5; }
+tr.even { background-color: white; }
+tr.odd:hover { background-color: #fad42e; }
+tr.even:hover { background-color: #fad42e; }

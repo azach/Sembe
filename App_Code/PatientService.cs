@@ -14,14 +14,20 @@ using MySql.Data.MySqlClient;
 [ScriptService] //Allow javascript to access web service
 public class PatientService : System.Web.Services.WebService {
 
+    /// <summary>
+    /// Finds a set of patients based on given criteria via web service. All fields are optional,
+    /// but at least one must be specified.
+    /// </summary>
+    /// <param name="fname">Patient's first name</param>
+    /// <param name="lname">Patient's last name</param>
+    /// <param name="dob">Patient's birth date</param>
+    /// <param name="sex">Patient's sex</param>
+    /// <param name="mrn">Patient's ID</param>
+    /// <returns>JSON formatted array of patients matching input criteria</returns>
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string FindPatient(string fname, string lname, string dob, string sex, string mrn)
     {
-        if ((String.IsNullOrWhiteSpace(fname)) & (String.IsNullOrWhiteSpace(lname)) & (String.IsNullOrWhiteSpace(mrn)))
-        {
-            throw new ArgumentException("Please enter a name or MRN");
-        }
 
         //Set up DB access
         string connString = System.Configuration.ConfigurationManager.ConnectionStrings["MySQL"].ConnectionString;
@@ -30,10 +36,40 @@ public class PatientService : System.Web.Services.WebService {
         MySqlDataReader reader;
 
         //Configure search query
-        if (!String.IsNullOrWhiteSpace(mrn)) { command.CommandText = "SELECT id,first_name,last_name,birth_date,sex FROM patient WHERE id=" + mrn; }
-        else { 
-            command.CommandText = "SELECT * FROM patient WHERE first_name=\"" + fname + "\"";
+        command.CommandText = "SELECT id,first_name,last_name,birth_date,sex FROM patient WHERE ";
+        string conditions = "";
+
+        if (!String.IsNullOrWhiteSpace(mrn))
+        {
+            conditions += "id=@mrn";
+            command.Parameters.Add("mrn", MySqlDbType.Int32).Value = mrn;
         }
+        if (!String.IsNullOrWhiteSpace(fname))
+        {
+            if (!String.IsNullOrWhiteSpace(conditions)) { conditions += " AND "; }
+            conditions += "first_name=@fname";
+            command.Parameters.Add("fname", MySqlDbType.String, 45).Value = fname;
+        }
+        if (!String.IsNullOrWhiteSpace(lname))
+        {
+            if (!String.IsNullOrWhiteSpace(conditions)) { conditions += " AND "; }
+            conditions += "last_name=@lname";
+            command.Parameters.Add("lname", MySqlDbType.String, 45).Value = lname;
+        }
+        if (!String.IsNullOrWhiteSpace(dob))
+        {
+            if (!String.IsNullOrWhiteSpace(conditions)) { conditions += " AND "; }
+            conditions += "birth_date=@dob";
+            command.Parameters.Add("dob", MySqlDbType.Date).Value = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dob));
+        }
+        if (!String.IsNullOrWhiteSpace(sex))
+        {
+            if (!String.IsNullOrWhiteSpace(conditions)) { conditions += " AND "; }
+            conditions += "sex=@sex";
+            command.Parameters.Add("sex", MySqlDbType.Enum).Value = sex;
+        }
+        if (String.IsNullOrWhiteSpace(conditions)) { throw new ArgumentException("Patient query not well-defined"); }
+        else { command.CommandText += conditions; }
 
         //Configure JSON data to return
         JavaScriptSerializer ser = new JavaScriptSerializer();
@@ -61,6 +97,15 @@ public class PatientService : System.Web.Services.WebService {
 
         return ser.Serialize(foundPatients);
     }
+    
+    /// <summary>
+    /// Creates a new patient via web service
+    /// </summary>
+    /// <param name="fname">Patient's first name</param>
+    /// <param name="lname">Patient's last name</param>
+    /// <param name="dob">Patient's date of birth</param>
+    /// <param name="sex">Patient's sex</param>
+    /// <returns>True if the patient is created</returns>
     [WebMethod]
     public bool CreatePatient(string fname, string lname, string dob, string sex)
     {        

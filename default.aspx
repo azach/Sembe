@@ -9,13 +9,20 @@
   <script type="text/javascript"src="/scripts/jquery-ui.min.js"></script>
   <script type="text/javascript"src="/scripts/jquery.dataTables.min.js"></script>
   <script type="text/javascript"src="/scripts/main.js"></script>
+
+    <img src="images/logo_medium.png" />
+
+    <div id="gl-primaryNavigation">
+      <ul>
+       <li class="gl-primaryNavigation-li"><a href="/" title="Home">Home</a></li>
+       <li class="gl-primaryNavigation-li"><a href="/tools.aspx" title="Tools">Tools</a></li>
+       <li class="gl-primaryNavigation-li"><a href="/options.aspx" title="Options">Options</a></li>
+     </ul>
+    </div>
 </head>
+
 <body>
-
-<br/><br/><br/><br/>
-<center><h1>Sembe</h1></center>
-<br/><br/><br/><br/>
-
+<br/><br/><br/><br/><br/><br/>
 <center>
 <button id="newpat" class="big">New Patient</button>
 <button id="findpat" class="big">Find Patient</button>
@@ -34,7 +41,7 @@
 
 <br />
 
-<div id="selectpatdialog">
+<div id="selectpatdialog" title="Select Patient">
 <table id="selectpat" cellpadding="0" cellspacing="0" border="0">
     <thead>
         <tr>

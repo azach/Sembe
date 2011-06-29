@@ -55,6 +55,7 @@ $(document).ready(function () {
             $("#lastname").val("");
             $("#dob").val("");
             $("#mrn").val("");
+            $("#sex").val("");
             $("#firstname").removeClass("ui-state-error");
             $("#lastname").removeClass("ui-state-error");
             $("#dob").removeClass("ui-state-error");
@@ -142,19 +143,26 @@ function FindPatient() {
     return true;
 }
 
-function SelectPatient(patients) {
+function SelectPatient(patients) {    
     $("#selectpatdialog").dialog({
         modal: true,
         autoOpen: false,
         width: 700,
         zIndex: 5,
         resizable: true,
-        close: function (ev, ui) { $(this).destroy(); }
+        close: function (ev, ui) {
+            $("#selectpat").dataTable().fnClearTable();
+            $("#firstname").val("");
+            $("#lastname").val("");
+            $("#dob").val("");
+            $("#mrn").val("");
+            $("#sex").val("");
+        }
     });
-    $("#selectpatdialog").dialog("option", "title", "Select Patient");
     $("#selectpatdialog").dialog("open");
     $("#selectpat").dataTable({
-        "bJQueryUI": true
+        "bJQueryUI": true,
+        "bRetrieve": true
     });
     for (i = 0; i < patients.length; i++) {
         $("#selectpat").dataTable().fnAddData([

@@ -69,7 +69,10 @@ public class PatientService : System.Web.Services.WebService {
             command.Parameters.Add("sex", MySqlDbType.Enum).Value = sex;
         }
         if (String.IsNullOrWhiteSpace(conditions)) { throw new ArgumentException("Patient query not well-defined"); }
-        else { command.CommandText += conditions; }
+        else { 
+            command.CommandText += conditions;
+            command.CommandText += " LIMIT 100";
+        }
 
         //Configure JSON data to return
         JavaScriptSerializer ser = new JavaScriptSerializer();
@@ -118,11 +121,12 @@ public class PatientService : System.Web.Services.WebService {
             string connString = System.Configuration.ConfigurationManager.ConnectionStrings["MySQL"].ConnectionString;
             MySqlConnection connection = new MySqlConnection(connString);
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO patient (first_name, last_name, birth_date, sex) VALUES (";
-            command.CommandText += "'" + fname + "', ";
-            command.CommandText += "'" + lname + "', ";
-            command.CommandText += "'" + String.Format("{0:yyyy-MM-dd}",Convert.ToDateTime(dob)) + "',";
-            command.CommandText += "'" + sex + "')";
+            command.CommandText = "INSERT INTO patient (first_name, last_name, birth_date, sex) VALUES (@fname, @lname, @dob, @sex)";
+            command.Parameters.Add("fname", MySqlDbType.String).Value = fname;
+            command.Parameters.Add("lname", MySqlDbType.String).Value = lname;
+            command.Parameters.Add("dob", MySqlDbType.Date).Value = String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(dob));
+            command.Parameters.Add("sex", MySqlDbType.Enum).Value = sex;
+
             connection.Open();
             command.ExecuteReader();
             connection.Close();

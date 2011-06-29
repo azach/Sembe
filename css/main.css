@@ -46,8 +46,53 @@ input:hover
     left:50%;
 }
 
+/* Main Body
+-----------------------------------*/
 body {
 	background-image: url('/images/bg.png');
 	background-repeat: repeat-x;
 	background-color: #A7CDE4;
+}
+
+/* Global navigation
+-----------------------------------*/
+
+#gl-primaryNavigation {
+    float: right;
+    background: #dfeffc;
+    border: 1px solid #c5dbec;
+    margin-top: 0px;
+    margin-right: 15px;
+}
+#gl-primaryNavigation ul {
+    float: left;
+    background: right bottom no-repeat;
+    padding: 2px .8em 2px;
+    margin: 0;    
+}
+#gl-primaryNavigation li {
+    float: left;
+    list-style: none;
+    margin: 0;
+    background: none;
+    padding: 0;
+}
+#gl-primaryNavigation li a {
+    float: left;
+    padding: 0 0.8em;
+    line-height: 25px;
+    font-size: 1.2em;
+    color: #1d5987;
+    text-decoration: none;
+    margin-bottom: 2px;
+}
+#gl-primaryNavigation li a:hover {
+    color: #1d5987;
+    border-bottom: 2px solid #79b7e7;
+    margin-bottom: 0;
+}
+#gl-primaryNavigation li a:active {
+    color: #1d5987;
+    border-bottom: 2px solid #e17009;
+    margin-bottom: 0;
 }

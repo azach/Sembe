@@ -1,3 +1,5 @@
+var selectPatTable;
+
 $(document).ready(function () {
     //Stylize the UI
     $(".date").datepicker();
@@ -38,7 +40,7 @@ $(document).ready(function () {
 	        },
 	        "Cancel": function () {
 	            $(this).dialog("close")
-	        } 
+	        }
 	    });
 	    $("#patdialog").dialog("option", "title", "Find Patient");
 	    $("#patdialog").dialog("open");
@@ -68,6 +70,18 @@ $(document).ready(function () {
     });
     $('#loading').ajaxStop(function () {
         $(this).hide();
+    });
+    //Create select patient table
+    selectPatTable = $("#selectpat").dataTable({
+        "bJQueryUI": true,
+        "bRetrieve": true
+    });
+    $("#selectpat tbody").click(function () {
+        var id = event.target.parentNode.childNodes[0].innerHTML;  //Get patient ID
+        if (id > 0) {
+            $("#selectpatformid").val(id);
+            $("#selectpatform").submit();
+        }
     });
 });
 
@@ -143,7 +157,7 @@ function FindPatient() {
     return true;
 }
 
-function SelectPatient(patients) {    
+function SelectPatient(patients) {
     $("#selectpatdialog").dialog({
         modal: true,
         autoOpen: false,
@@ -160,12 +174,9 @@ function SelectPatient(patients) {
         }
     });
     $("#selectpatdialog").dialog("open");
-    $("#selectpat").dataTable({
-        "bJQueryUI": true,
-        "bRetrieve": true
-    });
+
     for (i = 0; i < patients.length; i++) {
-        $("#selectpat").dataTable().fnAddData([
+        selectPatTable.fnAddData([
             patients[i].MRN,
             patients[i].First_Name,
             patients[i].Last_Name

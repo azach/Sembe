@@ -1,6 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_default" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
   <title>Sembe</title>
   <link href="/css/themes/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <link href="/css/main.css" rel="stylesheet" type="text/css"/>
@@ -9,7 +12,9 @@
   <script type="text/javascript"src="/scripts/jquery-ui.min.js"></script>
   <script type="text/javascript"src="/scripts/jquery.dataTables.min.js"></script>
   <script type="text/javascript"src="/scripts/main.js"></script>
+</head>
 
+<body>
     <img src="images/logo_medium.png" />
 
     <div id="gl-primaryNavigation">
@@ -19,10 +24,11 @@
        <li class="gl-primaryNavigation-li"><a href="/options.aspx" title="Options">Options</a></li>
      </ul>
     </div>
-</head>
-
-<body>
-<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/>
+<div id="ws-primaryNavigation">
+</div>
+<div id="ws-primaryContent">
+<br/><br/><br/><br/><br/>
 <center>
 <button id="newpat" class="big">New Patient</button>
 <button id="findpat" class="big">Find Patient</button>
@@ -41,17 +47,20 @@
 
 <br />
 
+<form id="selectpatform" name="selectpatform" method="post" action="Patient.aspx"><input id="selectpatformid" name="selectpatformid" value="" type="hidden"/></form>
 <div id="selectpatdialog" title="Select Patient">
-<table id="selectpat" cellpadding="0" cellspacing="0" border="0">
-    <thead>
-        <tr>
-            <th style="width: 100px;">ID</th>
-            <th style="width: 45%;">First Name</th>
-            <th style="width: 45%;">Last Name</th>
-        </tr>
-        <tbody></tbody>
-    </thead>
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="selectpat"> 
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
 </table>
+</div>
 </div>
 
 <div id="loading"><img class="centered" src="/images/loading.gif" alt="Loading"/></div>

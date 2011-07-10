@@ -20,13 +20,13 @@
 	<label for="firstname" class="dialog">First Name</label> <input type="text" name="firstname" id="firstname"/><br/>
 	<label for="lastname" class="dialog">Last Name</label> <input type="text" name="lastname" id="lastname" value=""/><br/>
 	<label for="dob" class="dialog">Date of Birth</label> <input type="text" class="date" name="dob" id="dob" value="" size="14"/><select name="sex" id="sex"><option value="" selected=true></option><option value="M">M</option><option value="F">F</option></select><br/>
-	<label for="mrn" class="dialog" id="mrnlabel">MRN</label> <input type="text" name="mrn" id="mrn"/>
+	<label for="mrn" class="dialog" id="mrnlabel">MRN</label> <input type="text" name="patientId" id="patientId"/>
 	</fieldset>	
 </div>
 
 <br />
 
-<form id="selectpatform" name="selectpatform" method="post" action="Patient.aspx"><input id="selectpatformid" name="selectpatformid" value="" type="hidden"/></form>
+<form id="selectpatform" name="selectpatform" method="post" action="Patient.aspx"><input id="selectpatformid" name="patientId" value="" type="hidden"/></form>
 
 <div id="selectpatdialog" title="Select Patient">
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="selectpat"> 

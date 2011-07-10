@@ -22,8 +22,9 @@
 
 <div id="glContainer">
 
-    <div id="glPrimaryHeader">
-        <img src="images/logo_medium.png" alt="Sembe" />    
+    <a href="/" ><img style="float: left;" src="images/logo_medium.png" alt="Sembe" /></a>
+
+    <div id="glPrimaryHeader">        
         <asp:ContentPlaceHolder id="glPrimaryHeaderHolder" runat="server"></asp:ContentPlaceHolder>
     </div>
 

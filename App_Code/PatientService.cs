@@ -4,6 +4,7 @@ using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Runtime.Serialization.Json;
+using Sembe;
 using MySql.Data.MySqlClient;
 
 /// <summary>
@@ -18,17 +19,16 @@ public class PatientService : System.Web.Services.WebService {
     /// Finds a set of patients based on given criteria via web service. All fields are optional,
     /// but at least one must be specified.
     /// </summary>
-    /// <param name="fname">Patient's first name</param>
-    /// <param name="lname">Patient's last name</param>
+    /// <param name="firstName">Patient's first name</param>
+    /// <param name="lastName">Patient's last name</param>
     /// <param name="dob">Patient's birth date</param>
     /// <param name="sex">Patient's sex</param>
-    /// <param name="mrn">Patient's ID</param>
+    /// <param name="patientId">Patient's ID</param>
     /// <returns>JSON formatted array of patients matching input criteria</returns>
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string FindPatient(string fname, string lname, string dob, string sex, string mrn)
+    public string FindPatient(string firstName, string lastName, string dob, string sex, string patientId)
     {
-
         //Set up DB access
         string connString = System.Configuration.ConfigurationManager.ConnectionStrings["MySQL"].ConnectionString;
         MySqlConnection connection = new MySqlConnection(connString);
@@ -39,22 +39,22 @@ public class PatientService : System.Web.Services.WebService {
         command.CommandText = "SELECT id,first_name,last_name,birth_date,sex FROM patient WHERE ";
         string conditions = "";
 
-        if (!String.IsNullOrWhiteSpace(mrn))
+        if (!String.IsNullOrWhiteSpace(patientId))
         {
             conditions += "id=@mrn";
-            command.Parameters.Add("mrn", MySqlDbType.Int32).Value = mrn;
+            command.Parameters.Add("mrn", MySqlDbType.Int32).Value = patientId;
         }
-        if (!String.IsNullOrWhiteSpace(fname))
+        if (!String.IsNullOrWhiteSpace(firstName))
         {
             if (!String.IsNullOrWhiteSpace(conditions)) { conditions += " AND "; }
             conditions += "first_name=@fname";
-            command.Parameters.Add("fname", MySqlDbType.String, 45).Value = fname;
+            command.Parameters.Add("fname", MySqlDbType.String, 45).Value = firstName;
         }
-        if (!String.IsNullOrWhiteSpace(lname))
+        if (!String.IsNullOrWhiteSpace(lastName))
         {
             if (!String.IsNullOrWhiteSpace(conditions)) { conditions += " AND "; }
             conditions += "last_name=@lname";
-            command.Parameters.Add("lname", MySqlDbType.String, 45).Value = lname;
+            command.Parameters.Add("lname", MySqlDbType.String, 45).Value = lastName;
         }
         if (!String.IsNullOrWhiteSpace(dob))
         {
@@ -86,10 +86,9 @@ public class PatientService : System.Web.Services.WebService {
         {
             while (reader.Read())
             {
-                foundPatients.Add(new Patient() { 
-                    MRN = reader.GetValue(0).ToString(),
-                    First_Name = reader.GetValue(1).ToString(),
-                    Last_Name = reader.GetValue(2).ToString(),                        
+                foundPatients.Add(new Patient((int) reader.GetValue(0)) {
+                    FirstName = reader.GetValue(1).ToString(),
+                    LastName = reader.GetValue(2).ToString(),                        
                     DOB = reader.GetValue(3).ToString(),
                     Sex = reader.GetValue(4).ToString()
                 });

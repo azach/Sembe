@@ -4,25 +4,31 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.SessionState;
 
 public partial class Patient : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        System.Text.StringBuilder displayValues =
-            new System.Text.StringBuilder();
-        System.Collections.Specialized.NameValueCollection
-            postedValues = Request.Form;
-        String nextKey;
-        for (int i = 0; i < postedValues.AllKeys.Length; i++)
-        {
-            nextKey = postedValues.AllKeys[i];
-            if (nextKey.Substring(0, 2) != "__")
-            {
-                //displayValues.Append(nextKey);
-                displayValues.Append(postedValues[i]);
-            }
+        string patientId = Request.Form["patientId"];
+        Sembe.Patient currentPatient = null;
+
+        //TODO: Support multiple patient workspaces
+        
+        if (Session.Count == 0 && patientId == null) { return; } //No patient information
+
+        if (patientId != null) {
+            Session["patientId"] = patientId;
+            currentPatient = new Sembe.Patient(Convert.ToInt32(patientId));
+            currentPatient.Initialize();
+            Session["patientObject"] = currentPatient;
         }
-        PatientName.Text = displayValues.ToString();
+        else
+        {
+            patientId = (string) Session["patientId"];
+            currentPatient = (Sembe.Patient) Session["patientObject"];
+        }
+
+        PatientName.Text = currentPatient.FormatName();
     }
 }

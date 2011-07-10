@@ -133,13 +133,13 @@ function FindPatient() {
     var lname = $("#lastname").val();
     var dob = $("#dob").val();
     var sex = $("#sex").val();
-    var mrn = $("#mrn").val();
+    var patientId = $("#patientId").val();
     var success = false;
     $.ajax({
         type: "POST",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
-        data: "{fname: \"" + fname + "\", lname: \"" + lname + "\", dob: \"" + dob + "\", sex: \"" + sex + "\", mrn: \"" + mrn + "\"}",
+        data: "{firstName: \"" + fname + "\", lastName: \"" + lname + "\", dob: \"" + dob + "\", sex: \"" + sex + "\", patientId: \"" + patientId + "\"}",
         url: "PatientService.asmx/FindPatient",
         success: function (msg) {
             var patients = $.parseJSON(msg.d);
@@ -147,11 +147,7 @@ function FindPatient() {
             else { SelectPatient(patients); }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            if (jqXHR.status == 500) {
-                var error = $.parseJSON(jqXHR.responseText);
-                alert(error.Message);
-            }
-            else { alert("Error: " + errorThrown); }
+            alert("Error: " + errorThrown);
         }
     });
     return true;
@@ -177,9 +173,9 @@ function SelectPatient(patients) {
 
     for (i = 0; i < patients.length; i++) {
         selectPatTable.fnAddData([
-            patients[i].MRN,
-            patients[i].First_Name,
-            patients[i].Last_Name
+            patients[i].ID,
+            patients[i].FirstName,
+            patients[i].LastName
         ]);
     }
 }

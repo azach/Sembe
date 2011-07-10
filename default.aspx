@@ -1,13 +1,17 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" MasterPageFile="~/MasterPage.master" Inherits="_default" %>
 
-<asp:Content ContentPlaceHolderID=wsprimaryNavigationHolder runat="server"></asp:Content>
+<asp:Content ContentPlaceHolderID="glPrimaryHeaderHolder" runat="server"></asp:Content>
 
-<asp:Content ContentPlaceHolderID=wsprimaryContentHolder runat="server">
-<br/><br/><br/><br/><br/>
+<asp:Content ContentPlaceHolderID="wsPrimaryNavigationHolder" runat="server"></asp:Content>
+
+<asp:Content ContentPlaceHolderID="wsPrimaryContentHolder" runat="server">
+
+<div style="padding-top: 100px;">
 <center>
-<button id="newpat" class="big">New Patient</button>
-<button id="findpat" class="big">Find Patient</button>
+    <button id="newpat" class="big">New Patient</button>
+    <button id="findpat" class="big">Find Patient</button>
 </center>
+</div>
 
 <!--New/Find patient dialog-->
 <div id="patdialog">
@@ -23,18 +27,21 @@
 <br />
 
 <form id="selectpatform" name="selectpatform" method="post" action="Patient.aspx"><input id="selectpatformid" name="selectpatformid" value="" type="hidden"/></form>
+
 <div id="selectpatdialog" title="Select Patient">
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="selectpat"> 
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-		</tr>
-	</thead>
-	<tbody>
-	</tbody>
-</table>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="selectpat"> 
+	    <thead>
+		    <tr>
+			    <th>ID</th>
+			    <th>First Name</th>
+			    <th>Last Name</th>
+		    </tr>
+	    </thead>
+	    <tbody>
+	    </tbody>
+    </table>
 </div>
+
 <div id="loading"><img class="centered" src="/images/loading.gif" alt="Loading"/></div>
+
 </asp:Content>

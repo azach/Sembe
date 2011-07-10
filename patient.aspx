@@ -1,14 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Patient.aspx.cs" Inherits="Patient" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master" CodeFile="Patient.aspx.cs" Inherits="Patient" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<asp:Content ContentPlaceHolderID="glPrimaryHeaderHolder" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="PatientRequest" runat="server">
-    <asp:Label ID="PatientName" runat="server" Text=""></asp:Label>
-    </form>
-</body>
-</html>
+    <asp:Label ID="PatientName" runat="server" CssClass="ui-label-big"></asp:Label>
+
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="wsPrimaryNavigationHolder" runat="server"></asp:Content>
+
+<asp:Content ContentPlaceHolderID="wsPrimaryContentHolder" runat="server">
+</asp:Content>

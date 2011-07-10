@@ -15,6 +15,11 @@ label.dialog { display: block; margin: 0px; width: 7em; float: left; vertical-al
 ----------------------------------*/
 button.big { font-size:200%; }
 
+.ui-label-big  
+{
+    font-size: 1.5em;
+}
+
 #loading {
 	position: absolute;
 	top: 0;
@@ -54,29 +59,48 @@ body {
 	background-color: #A7CDE4;
 }
 
+/* Global container
+-----------------------------------*/
+#glContainer 
+{
+    height: 93px;
+    display: block;
+}
+
+/* Global header
+-----------------------------------*/
+#glPrimaryHeader 
+{
+    float: left;
+    margin-top: 0px;
+    margin-right: 100px;
+    background-color: inherit;
+}
+
 /* Global navigation
 -----------------------------------*/
-#gl-primaryNavigation {
-    float: right;
+#glPrimaryNavigation 
+{    
+    float: right;    
     background: #dfeffc;
     border: 2px solid #79b7e7;
     margin-top: 0px;
     margin-right: 15px;
 }
-#gl-primaryNavigation ul {
+#glPrimaryNavigation ul {
     float: left;
     background: right bottom no-repeat;
     padding: 2px .8em 2px;
     margin: 0;    
 }
-#gl-primaryNavigation li {
+#glPrimaryNavigation li {
     float: left;
     list-style: none;
     margin: 0;
     background: none;
     padding: 0;
 }
-#gl-primaryNavigation li a {
+#glPrimaryNavigation li a {
     float: left;
     padding: 0 0.8em;
     line-height: 25px;
@@ -85,26 +109,50 @@ body {
     text-decoration: none;
     margin-bottom: 2px;
 }
-#gl-primaryNavigation li a:hover {
+#glPrimaryNavigation li a:hover {
     color: #1d5987;
     border-bottom: 2px solid #79b7e7;
     margin-bottom: 0;
 }
-#gl-primaryNavigation li a:active {
+#glPrimaryNavigation li a:active {
     color: #1d5987;
     border-bottom: 2px solid #e17009;
     margin-bottom: 0;
 }
 
+/* Workspace container
+-----------------------------------*/
+#wsContainer 
+{
+    display: block;
+    margin-top: 20px;    
+    min-height: 200px;
+}
+
 /* Workspace navigation
 -----------------------------------*/
-#ws-primaryNavigation
+#wsPrimaryNavigation
 {
+    position: relative;
     float: left;
-    background-color: inherit;
+    margin-left: -7px;
     border: 0px;
-    margin-left: -8px;
-    margin-right: 10px;
-    width: 150px;
-    height: 200px;
+    width: 170px;
+    min-height: 200px;
+}
+
+/* Workspace content
+-----------------------------------*/
+#wsPrimaryContent
+{
+}
+
+/* Global footer
+-----------------------------------*/
+#glFooter
+{
+    min-height: 20px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
 }

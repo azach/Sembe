@@ -19,9 +19,7 @@ public partial class Patient : System.Web.UI.Page
             nextKey = postedValues.AllKeys[i];
             if (nextKey.Substring(0, 2) != "__")
             {
-                displayValues.Append("<br>");
-                displayValues.Append(nextKey);
-                displayValues.Append(" = ");
+                //displayValues.Append(nextKey);
                 displayValues.Append(postedValues[i]);
             }
         }

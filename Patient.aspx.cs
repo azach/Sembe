@@ -15,7 +15,7 @@ public partial class Patient : System.Web.UI.Page
 
         //TODO: Support multiple patient workspaces
         
-        if (Session.Count == 0 && patientId == null) { return; } //No patient information
+        if (Session.Count == 0 && patientId == null) { Server.Transfer("/Default.aspx"); } //No patient information
 
         if (patientId != null) {
             Session["patientId"] = patientId;
@@ -29,6 +29,10 @@ public partial class Patient : System.Web.UI.Page
             currentPatient = (Sembe.Patient) Session["patientObject"];
         }
 
-        PatientName.Text = currentPatient.FormatName();
+        FullName.Text = currentPatient.FormatName();
+        BasicDemographics.Text =
+            "<b>ID:</b> " + currentPatient.ID.ToString() + " " +
+            "<b>Sex:</b> " + currentPatient.Sex.ToString() + " " +
+            "<b>Date of Birth:</b> " + String.Format("{0:yyyy-MM-dd}", Convert.ToDateTime(currentPatient.DOB));
     }
 }

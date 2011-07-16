@@ -9,8 +9,8 @@ $(document).ready(function () {
 	function () {
 	    //Hide MRN
 	    $("#patdialog").bind("dialogopen", function (event, ui) {
-	        $("#mrn").hide();
-	        $("#mrnlabel").hide();
+	        $("#patientId").hide();
+	        $("#patientIdlabel").hide();
 	    });
 	    //Add new patient buttons to dialog
 	    $("#patdialog").dialog("option", "buttons", {
@@ -29,8 +29,8 @@ $(document).ready(function () {
 	function () {
 	    //Show MRN
 	    $("#patdialog").bind("dialogopen", function (event, ui) {
-	        $("#mrn").show();
-	        $("#mrnlabel").show();
+	        $("#patientId").show();
+	        $("#patientIdlabel").show();
 	    });
 	    //Add find patient buttons to dialog
 	    $("#patdialog").dialog("option", "buttons", {
@@ -56,7 +56,7 @@ $(document).ready(function () {
             $("#firstname").val("");
             $("#lastname").val("");
             $("#dob").val("");
-            $("#mrn").val("");
+            $("#patientId").val("");
             $("#sex").val("");
             $("#firstname").removeClass("ui-state-error");
             $("#lastname").removeClass("ui-state-error");
@@ -165,7 +165,7 @@ function SelectPatient(patients) {
             $("#firstname").val("");
             $("#lastname").val("");
             $("#dob").val("");
-            $("#mrn").val("");
+            $("#patientId").val("");
             $("#sex").val("");
         }
     });

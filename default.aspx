@@ -14,13 +14,13 @@
 </div>
 
 <!--New/Find patient dialog-->
-<div id="patdialog">
+<div id="patdialog"  style="display: none;">
 	<p>All form fields are required.</p>	
 	<fieldset>
 	<label for="firstname" class="dialog">First Name</label> <input type="text" name="firstname" id="firstname"/><br/>
 	<label for="lastname" class="dialog">Last Name</label> <input type="text" name="lastname" id="lastname" value=""/><br/>
 	<label for="dob" class="dialog">Date of Birth</label> <input type="text" class="date" name="dob" id="dob" value="" size="14"/><select name="sex" id="sex"><option value="" selected=true></option><option value="M">M</option><option value="F">F</option></select><br/>
-	<label for="mrn" class="dialog" id="mrnlabel">MRN</label> <input type="text" name="patientId" id="patientId"/>
+	<label for="patientId" class="dialog" id="patientIdlabel">MRN</label> <input type="text" name="patientId" id="patientId"/>
 	</fieldset>	
 </div>
 

@@ -24,7 +24,7 @@ namespace Sembe
         /// </summary>
         public void Initialize()
         {
-            if (this.ID == null) { throw new MissingMemberException("Patient object missing ID"); }
+            if (this.ID == 0) { throw new MissingMemberException("Patient object missing ID"); }
 
             //Set up DB access
             string connString = System.Configuration.ConfigurationManager.ConnectionStrings["MySQL"].ConnectionString;

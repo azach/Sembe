@@ -47,13 +47,13 @@ public class PatientService : System.Web.Services.WebService {
         if (!String.IsNullOrWhiteSpace(firstName))
         {
             if (!String.IsNullOrWhiteSpace(conditions)) { conditions += " AND "; }
-            conditions += "first_name=@fname";
+            conditions += "SOUNDEX(first_name)=SOUNDEX(@fname)";
             command.Parameters.Add("fname", MySqlDbType.String, 45).Value = firstName;
         }
         if (!String.IsNullOrWhiteSpace(lastName))
         {
             if (!String.IsNullOrWhiteSpace(conditions)) { conditions += " AND "; }
-            conditions += "last_name=@lname";
+            conditions += "SOUNDEX(last_name)=SOUNDEX(@lname)";
             command.Parameters.Add("lname", MySqlDbType.String, 45).Value = lastName;
         }
         if (!String.IsNullOrWhiteSpace(dob))
@@ -88,7 +88,7 @@ public class PatientService : System.Web.Services.WebService {
             {
                 foundPatients.Add(new Patient((int) reader.GetValue(0)) {
                     FirstName = reader.GetValue(1).ToString(),
-                    LastName = reader.GetValue(2).ToString(),                        
+                    LastName = reader.GetValue(2).ToString(),
                     DOB = reader.GetValue(3).ToString(),
                     Sex = reader.GetValue(4).ToString()
                 });
@@ -107,7 +107,8 @@ public class PatientService : System.Web.Services.WebService {
     /// <param name="lname">Patient's last name</param>
     /// <param name="dob">Patient's date of birth</param>
     /// <param name="sex">Patient's sex</param>
-    /// <returns>True if the patient is created</returns>
+    /// <returns>True if the patient is created</returns>    
+    //TODO: Return ID and forward user to Patient.aspx    
     [WebMethod]
     public bool CreatePatient(string fname, string lname, string dob, string sex)
     {        

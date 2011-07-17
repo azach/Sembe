@@ -20,7 +20,7 @@
 
 <body>
 
-<div id="glContainer">
+    <div id="glContainer">
 
     <a href="/" ><img style="float: left;" src="images/logo_medium.png" alt="Sembe" /></a>
 
@@ -33,8 +33,9 @@
        <li class="glPrimaryNavigation-li"><a href="/" title="Home">Home</a></li>
        <li class="glPrimaryNavigation-li"><a href="/tools.aspx" title="Tools">Tools</a></li>
        <li class="glPrimaryNavigation-li"><a href="/options.aspx" title="Options">Options</a></li>
-      </ul>
+      </ul>      
     </div>
+    <br /><ul style="display: block; font-family: Lucida Sans; padding-top: 10px; text-align: right; margin-right: 20px;">Welcome, <asp:LoginName runat="server"></asp:LoginName>!</ul>
 
 </div>
 

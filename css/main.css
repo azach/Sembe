@@ -144,6 +144,81 @@ body {
     min-height: 200px;
 }
 
+li.wsPrimaryNavigationHeader
+{
+    display: block;
+    color: #222222;
+    font-size: 1.3em;
+    font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
+    font-weight: bold;
+    border-bottom: 1px solid black;    
+    text-align: center;
+    height: 35px;
+    margin-bottom: 8px;
+    padding-right: 0px;
+    width: 180px;
+}
+
+ul.wsPrimaryNavigationItem
+{   
+    width: 190px;
+    height: 100%;
+    border-right: 1px solid black;    
+}
+
+li.wsPrimaryNavigationItem
+{
+    display: block;
+    color: #222222;
+    font-size: 1.3em;
+    font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
+    cursor: pointer;
+    height: 29px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    width: 160px;
+}
+
+li:hover.wsPrimaryNavigationItem
+{
+    background-color: #fcfdfd;
+}
+
+li.wsPrimaryNavigationItemSelected
+{
+    display: block;
+    color: #D14836;
+    font-size: 1.2em;
+    font-family: Arial;
+    cursor: pointer;
+}
+
+.wsPrimaryNavigationItemIcon
+{
+    background-image: url('/images/wsPrimaryNavigation.png');
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-origin: padding-box;    
+    display: block;
+    float: left;
+    font-size: 15px;
+    height: 19px;
+    line-height: 29px;
+    list-style-type: disc;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 9px;
+    margin-top: 1px;
+    opacity: 1;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-left: 0px;
+    width: 19px;
+}
+
 /* Workspace content
 -----------------------------------*/
 #wsPrimaryContent

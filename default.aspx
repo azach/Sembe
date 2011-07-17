@@ -2,7 +2,15 @@
 
 <asp:Content ContentPlaceHolderID="glPrimaryHeaderHolder" runat="server"></asp:Content>
 
-<asp:Content ContentPlaceHolderID="wsPrimaryNavigationHolder" runat="server"></asp:Content>
+<asp:Content ContentPlaceHolderID="wsPrimaryNavigationHolder" runat="server">
+    <div>        
+        <ul class="wsPrimaryNavigationItem">
+            <li class="wsPrimaryNavigationHeader">Navigation</li>
+            <li class="wsPrimaryNavigationItem"><span class="wsPrimaryNavigationItemIcon" style="background-position: -5px -1px"></span>Find Patient</li>
+            <li class="wsPrimaryNavigationItem"><span class="wsPrimaryNavigationItemIcon" style="background-position: -5px -20px"></span>Vitals</li>
+        </ul>
+    </div>
+</asp:Content>
 
 <asp:Content ContentPlaceHolderID="wsPrimaryContentHolder" runat="server">
 

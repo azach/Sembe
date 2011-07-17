@@ -214,10 +214,12 @@ table.display tr.even.gradeU {
 
 tr.odd {
 	background-color: white;
+	cursor: pointer;
 }
 
 tr.even {
 	background-color: #E0EDF5;
+	cursor: pointer;
 }
 
 tr.odd:hover  
